@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class TimePickerWidget extends HookWidget {
-  const TimePickerWidget({super.key});
+  final ValueNotifier<TimeOfDay?> pickedTime;
+  const TimePickerWidget({
+    super.key,
+    required this.pickedTime,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final pickedTime = useState<TimeOfDay?>(TimeOfDay.now());
 
     return Row(
       children: [

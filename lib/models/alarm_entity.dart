@@ -5,7 +5,7 @@ class AlarmEntity {
   @Id()
   int id = 0;
 
-  final DateTime time;
+  final String time;
   final String label;
   final bool isActive;
 

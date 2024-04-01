@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:1325097986551720835",
-      "lastPropertyId": "4:2868252316652974581",
+      "lastPropertyId": "5:9211045691339276056",
       "name": "AlarmEntity",
       "properties": [
         {
@@ -13,11 +13,6 @@
           "name": "id",
           "type": 6,
           "flags": 1
-        },
-        {
-          "id": "2:1814671858402513967",
-          "name": "time",
-          "type": 10
         },
         {
           "id": "3:2922744637486938988",
@@ -28,6 +23,11 @@
           "id": "4:2868252316652974581",
           "name": "isActive",
           "type": 1
+        },
+        {
+          "id": "5:9211045691339276056",
+          "name": "time",
+          "type": 9
         }
       ],
       "relations": []
@@ -41,7 +41,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    1814671858402513967
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

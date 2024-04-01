@@ -1,3 +1,6 @@
+import 'package:alrm_app/models/alarm_model.dart';
+import 'package:alrm_app/providers/alarm_provider.dart';
+import 'package:alrm_app/view/widgets/elevated_button_widget.dart';
 import 'package:alrm_app/view/widgets/textfield_widget.dart';
 import 'package:alrm_app/view/widgets/timepicker_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +13,7 @@ class AddAlarmPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final titleController = useTextEditingController();
+    final pickedTime = useState<TimeOfDay?>(TimeOfDay.now());
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -33,10 +37,21 @@ class AddAlarmPage extends HookConsumerWidget {
               const SizedBox(
                 height: 20,
               ),
-              const TimePickerWidget()
+              TimePickerWidget(
+                pickedTime: pickedTime,
+              )
             ],
           ),
         ),
+        bottomNavigationBar: ElevatedButtonWidget(
+            onpressed: () {
+              ref.read(alarmProvider.notifier).addAlarm(AlarmModel(
+                    time: pickedTime.value!.format(context),
+                    label: titleController.text,
+                    isActive: true,
+                  ));
+            },
+            text: 'Save'),
       ),
     );
   }
