@@ -20,13 +20,13 @@ class Alarm extends _$Alarm {
     box.put(alarmEntity);
   }
 
-  Future<List<AlarmModel>> getAlarm() async {
+  Stream<List<AlarmModel>> getAlarm() async* {
     final alarms = box.getAll();
     final data = [
       for (var alarm in alarms)
         AlarmModel(
             time: alarm.time, label: alarm.label, isActive: alarm.isActive)
     ];
-    return data;
+    yield data;
   }
 }

@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ElevatedButtonWidget extends ConsumerWidget {
   final VoidCallback onpressed;
-  final String text;
+  final Widget child;
   const ElevatedButtonWidget({
     super.key,
     required this.onpressed,
-    required this.text,
+    required this.child,
   });
 
   @override
@@ -15,10 +15,11 @@ class ElevatedButtonWidget extends ConsumerWidget {
     return ElevatedButton(
       onPressed: onpressed,
       style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 16),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      child: Text(text),
+      child: child,
     );
   }
 }
