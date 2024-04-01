@@ -28,6 +28,9 @@ class AddAlarmPage extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 24,
+              ),
               FutureBuilder(
                 future: ApiServices.getCurrentWeather(), //Fetch weather data
                 builder: (context, snapshot) {
@@ -41,8 +44,8 @@ class AddAlarmPage extends HookConsumerWidget {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Container(
-                        height: 60,
-                        width: 120,
+                        height: 100,
+                        width: MediaQuery.sizeOf(context).width,
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -57,7 +60,7 @@ class AddAlarmPage extends HookConsumerWidget {
                           child: Text(
                             '🌦️$currentWeather ℃', // Display current weather
                             style: const TextStyle(
-                              fontSize: 20,
+                              fontSize: 30,
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                             ),
@@ -67,6 +70,9 @@ class AddAlarmPage extends HookConsumerWidget {
                     );
                   }
                 },
+              ),
+              const SizedBox(
+                height: 24,
               ),
               const Text(
                 "Title",
@@ -98,9 +104,9 @@ class AddAlarmPage extends HookConsumerWidget {
                     ),
                   )
                 : const Text('Save'),
-            onpressed: () async {
+            onpressed: () {
               isLoading.value = true;
-              await ref.read(alarmProvider.notifier).addAlarm(AlarmModel(
+              ref.read(alarmProvider.notifier).addAlarm(AlarmModel(
                     time: pickedTime.value!.format(context),
                     label: titleController.text,
                     isActive: true,

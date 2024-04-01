@@ -10,23 +10,47 @@ class Alarm extends _$Alarm {
   final box = ObjectBox.instance.alarmBox;
 
   @override
-  List<AlarmEntity> build() {
+  List<AlarmModel> build() {
     return [];
   }
 
-  Future<void> addAlarm(AlarmModel alarm) async {
+  void addAlarm(AlarmModel alarm) {
     final alarmEntity = AlarmEntity(
-        time: alarm.time.toString(), label: alarm.label, isActive: alarm.isActive);
+        time: alarm.time.toString(),
+        label: alarm.label,
+        isActive: alarm.isActive);
     box.put(alarmEntity);
+
+    getAlarm();
   }
 
-  Stream<List<AlarmModel>> getAlarm() async* {
+  void toggleAlarm(AlarmModel alarm) async {
+    box.put(
+      AlarmEntity(
+          id: alarm.id,
+          time: alarm.time,
+          label: alarm.label,
+          isActive: !alarm.isActive),
+    );
+
+    getAlarm();
+  }
+
+  void getAlarm() {
     final alarms = box.getAll();
     final data = [
       for (var alarm in alarms)
         AlarmModel(
-            time: alarm.time, label: alarm.label, isActive: alarm.isActive)
+            id: alarm.id,
+            time: alarm.time,
+            label: alarm.label,
+            isActive: alarm.isActive)
     ];
-    yield data;
+    state = data;
+  }
+
+  void deleteAlarm(int id) {
+    box.remove(id);
+    getAlarm();
   }
 }

@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 class ApiServices {
   static Future<String> getCurrentWeather() async {
+    await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     final response = await http.get(Uri.parse(
