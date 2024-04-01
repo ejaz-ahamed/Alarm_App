@@ -1,6 +1,6 @@
-import 'package:alrm_app/controller/services/api_services.dart';
+import 'package:alrm_app/services/api_services.dart';
 import 'package:alrm_app/models/alarm_model.dart';
-import 'package:alrm_app/controller/providers/alarm_provider.dart';
+import 'package:alrm_app/providers/alarm_provider.dart';
 import 'package:alrm_app/view/widgets/elevated_button_widget.dart';
 import 'package:alrm_app/view/widgets/textfield_widget.dart';
 import 'package:alrm_app/view/widgets/timepicker_widget.dart';

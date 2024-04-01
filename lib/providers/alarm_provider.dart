@@ -11,7 +11,13 @@ class Alarm extends _$Alarm {
 
   @override
   List<AlarmModel> build() {
-    return [];
+    final alarmsEntity = box.getAll();
+    final List<AlarmModel> alarmModel = alarmsEntity
+        .map(
+          (e) => AlarmModel(time: e.time, label: e.label, isActive: e.isActive),
+        )
+        .toList();
+    return alarmModel;
   }
 
   void addAlarm(AlarmModel alarm) {
