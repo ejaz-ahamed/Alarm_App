@@ -94,23 +94,16 @@ class AddAlarmPage extends HookConsumerWidget {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(16),
           child: ElevatedButtonWidget(
-            child: isLoading.value
-                ? const Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-                : const Text('Save'),
+            child: const Text('Save'),
             onpressed: () {
               isLoading.value = true;
-              ref.read(alarmProvider.notifier).addAlarm(AlarmModel(
+              ref.read(alarmProvider.notifier).addAlarm(
+                  AlarmModel(
                     time: pickedTime.value!.format(context),
                     label: titleController.text,
                     isActive: true,
-                  ));
+                  ),
+                  titleController.text);
               Future.sync(() => Navigator.pop(context));
             },
           ),
