@@ -44,8 +44,9 @@ class Alarm extends _$Alarm {
         isActive: alarm.isActive);
     box.put(alarmEntity);
 
-    final time = DateFormat.jm();
-    TimeOfDay selectedTime = TimeOfDay.fromDateTime(time.parse(alarmEntity.time));
+    final time = DateFormat("h':'m' 'a");
+    TimeOfDay selectedTime =
+        TimeOfDay.fromDateTime(time.parse(alarmEntity.time));
 
     getAlarm();
     await scheduleAlarm(text, selectedTime);
@@ -102,7 +103,14 @@ class Alarm extends _$Alarm {
       importance: Importance.high,
       priority: Priority.high,
       playSound: true,
+      fullScreenIntent: true,
+      enableVibration: true,
+      ongoing: true,
+      visibility: NotificationVisibility.public,
+      audioAttributesUsage: AudioAttributesUsage.alarm,
       sound: RawResourceAndroidNotificationSound('notification_sound'),
+      category: AndroidNotificationCategory.alarm,
+      
     );
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
@@ -115,6 +123,7 @@ class Alarm extends _$Alarm {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
     );
   }
 }
